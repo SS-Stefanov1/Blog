@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('company');
             $table->string('website');
             $table->string('location');
-            $table->longText('description');
+            $table->string('image')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

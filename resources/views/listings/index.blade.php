@@ -9,5 +9,7 @@
         @endforeach
     @endif
     </div>
+
+    <div class="mr-5 mt-20">{{ $listings->links(); }}</div>
 </x-layout>
 

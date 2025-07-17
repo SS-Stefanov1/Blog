@@ -8,7 +8,10 @@ use Illuminate\Validation\Rule;
 class ListingController extends Controller {
     public function index() {
         return view("listings.index", [
-            "listings" => Listing::latest()->filter(request(['tag','search']))->get(),
+            "listings" => Listing::latest()
+            ->filter(request(['tag','search']))
+            ->paginate(5),
+            //->get(),
 
             //"listings" => Listing::all(), 
         ]);
@@ -25,6 +28,8 @@ class ListingController extends Controller {
     }
 
     public function store(Request $req) {
+        //dd($req->hasFile('logo'));
+
         $formData = $req->validate([
             'title'    => 'required',
             'company'  => ['required', Rule::unique('listings', 'company')],
@@ -33,6 +38,10 @@ class ListingController extends Controller {
             'email'    => ['required', 'email', Rule::unique('listings', 'email')],
             'tags'     => 'required'
         ]);
+
+        if ($req->hasFile('image')) {
+            $formData['image'] = $req->file('image')->store('post_imgs', 'public');;
+        }
 
         Listing::create($formData);
 
