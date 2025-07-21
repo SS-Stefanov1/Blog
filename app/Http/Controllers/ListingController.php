@@ -19,12 +19,18 @@ class ListingController extends Controller {
 
     public function show(Listing $listing) {
         return view('listings.show', [
-            'listing' => $listing
+            'listing' => $listing,
         ]);
     }
 
     public function create() {
         return view('listings.create');
+    }
+
+    public function edit(Listing $listing) {
+        return view('listings.edit', [
+            'listing' => $listing,
+        ]);
     }
 
     public function store(Request $req) {
