@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 
 // Route::get('/', function () {
@@ -41,6 +42,14 @@ Route::get('/listings/{listing}/edit',
     [ListingController::class, 'edit']
 );
 
+Route::put('listings/{listing}', 
+    [ListingController::class, 'update']
+);
+
+Route::delete('listings/{listing}', 
+    [ListingController::class, 'delete']
+);
+
 Route::get("/listings/{listing}", 
     [ListingController::class, "show"]
 
@@ -57,4 +66,12 @@ Route::get("/listings/{listing}",
         //     return response("<h1>Listing not found.</h1>");
         // }
     // }
+);
+
+Route::get('/register', 
+    [UserController::class, 'create']
+);
+
+Route::post('/users', 
+    [UserController::class, "store"]
 );
