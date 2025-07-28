@@ -68,10 +68,18 @@ Route::get("/listings/{listing}",
     // }
 );
 
+Route::get('/login', 
+    [UserController::class, 'login']
+);
+
 Route::get('/register', 
     [UserController::class, 'create']
 );
 
 Route::post('/users', 
-    [UserController::class, "store"]
+    [UserController::class, 'store']
+);
+
+Route::post('/users/authenticate',
+    [UserController::class, 'authenticate']
 );
